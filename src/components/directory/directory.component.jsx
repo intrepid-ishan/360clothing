@@ -42,7 +42,6 @@ const Directory = () => {
     return (
         <div className='directory-menu'>
             {sections.map(({ id, ...otherSectionProps }) => {
-                console.log("🚀 ~ file: directory.component.jsx ~ line 45 ~ {sections.map ~ otherSectionProps", otherSectionProps);
                 return < MenuItem key={id} {...otherSectionProps} />;
             })}
         </div>
