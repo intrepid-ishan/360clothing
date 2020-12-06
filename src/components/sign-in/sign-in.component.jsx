@@ -4,14 +4,24 @@ import './sign-in.styles.scss';
 import FormInput from '../form-input/form-input.component';
 import CustomButton from '../custom-button/custom-button.component';
 
+import { auth, signInWithGoogle } from '../../firebase/firebase.utils.js';
+
 const SignIn = () => {
 
     const [userDetails, setUserDetails] = useState({ email: '', password: '' });
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        setUserDetails({ email: '', password: '' });
+        const { email, password } = userDetails;
+
+        try {
+            await auth.signInWithEmailAndPassword(email, password);
+            setUserDetails({ email: '', password: '' });
+        } catch (error) {
+            console.log(error);
+        }
+
     };
 
     const handleChange = (e) => {
@@ -45,7 +55,10 @@ const SignIn = () => {
                     label='password'
                     required
                 />
-                <CustomButton type='submit'>Sign In</CustomButton>
+                <div className="buttons">
+                    <CustomButton type='submit'>Sign In</CustomButton>
+                    <CustomButton onClick={signInWithGoogle} isGoogleSignIn >Sign In With Google</CustomButton>
+                </div>
             </form>
         </div>
     );
