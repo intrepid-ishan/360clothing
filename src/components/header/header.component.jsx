@@ -3,6 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { auth } from '../../firebase/firebase.utils';
 
+import { connect } from 'react-redux';//HOC 
+
 import { ReactComponent as Logo } from '../../assets/360.svg';
 
 import './header.styles.scss';
@@ -35,4 +37,12 @@ const Header = ({ currentUser }) => {
     );
 };
 
-export default Header;
+//to get state value - use mapStateToProps
+//state - top level root reducer
+//returns obj - name of prop=(actual prop to be passed to component i.e 'currentUser')
+const mapStateToProps = (state) => ({
+    currentUser: state.user.currentUser
+});
+
+export default connect(mapStateToProps)(Header);
+//HOC - function that take component as argument and return new charged component
