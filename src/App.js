@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { Switch, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 import './App.css';
 
@@ -12,25 +12,24 @@ import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 import { setCurrentUser } from './redux/user/user.actions';
 
-const App = (props) => {
+const App = ({ setCurrentUser, currentUser }) => {
 
     useEffect(() => {
         auth.onAuthStateChanged(async user => {
             // console.log("🚀 ~ file: App.js ~ line 18 ~ useEffect ~ user", user); //null - signout
             if (user) {
                 const userRef = await createUserProfileDocument(user);
-
                 userRef.onSnapshot(snapShot => {
-                    props.setCurrentUser({
+                    setCurrentUser({
                         id: snapShot.id,
                         ...snapShot.data()
                     });
                 });
             } else {
-                props.setCurrentUser(user);
+                setCurrentUser(user);
             }
         });
-    }, [props]);
+    }, [setCurrentUser]);
 
     //TODO: unsubscribe
 
@@ -40,17 +39,25 @@ const App = (props) => {
             <Switch>
                 <Route exact path='/' component={HomePage} />
                 <Route path='/shop' component={ShopPage} />
-                <Route path='/signin' component={SignInAndSignUpPage} />
+                {/* render - javascript invocation to return component */}
+                <Route
+                    exact
+                    path='/signin'
+                    render={() =>
+                        currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)
+                    }
+                />
             </Switch>
         </div>
     );
 };
 
-//function - it gets dispatch property
-//returns obj - prop name = ()
+const mapStateToProps = (state) => ({
+    currentUser: state.user.currentUser
+});
+
 const mapDispatchToProps = dispatch => ({
-    //dispatching the object indirectly 
     setCurrentUser: user => dispatch(setCurrentUser(user))
 });
 
-export default connect(null, mapDispatchToProps)(App);
+export default connect(mapStateToProps, mapDispatchToProps)(App);

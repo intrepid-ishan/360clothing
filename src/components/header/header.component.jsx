@@ -1,15 +1,16 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
-import { auth } from '../../firebase/firebase.utils';
-
 import { connect } from 'react-redux';//HOC 
 
+import { auth } from '../../firebase/firebase.utils';
 import { ReactComponent as Logo } from '../../assets/360.svg';
+import CartIcon from '../cart-icon/cart-icon.component';
+import CartDropdown from '../cart-dropdown/cart-dropdown.component';
 
 import './header.styles.scss';
 
-const Header = ({ currentUser }) => {
+//{ currentUser, hidden }
+const Header = (props) => {
     // console.log("🚀 ~ file: header.component.jsx ~ line 11 ~ Header ~ currentUser", currentUser);
     return (
         <div className='header'>
@@ -23,7 +24,7 @@ const Header = ({ currentUser }) => {
                 <Link className='option' to='/shop'>
                     CONTACT
                 </Link>
-                {currentUser ? (
+                {props.currentUser ? (
                     <div className="option" onClick={() => auth.signOut()}>
                         SIGN OUT
                     </div>
@@ -32,17 +33,19 @@ const Header = ({ currentUser }) => {
                             SIGN IN
                         </Link>
                     )}
+                <CartIcon />
             </div>
+            {props.hidden ? null : <CartDropdown />}
         </div>
     );
 };
 
-//to get state value - use mapStateToProps
-//state - top level root reducer
-//returns obj - name of prop=(actual prop to be passed to component i.e 'currentUser')
+//({user: { currentUser },cart: { hidden }})
 const mapStateToProps = (state) => ({
-    currentUser: state.user.currentUser
+    //currentUser,hidden
+    //currentUser: currentUser, hidden: hidden
+    currentUser: state.user.currentUser,
+    hidden: state.cart.hidden
 });
 
 export default connect(mapStateToProps)(Header);
-//HOC - function that take component as argument and return new charged component
