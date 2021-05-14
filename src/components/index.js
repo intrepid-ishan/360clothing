@@ -1,5 +1,7 @@
 import CartDropdown from './CartDropdown/CartDropdown';
 import CartIcon from './CartIcon/CartIcon';
+import CartItem from './CartItem/CartItem';
+import CheckoutItem from './CheckoutItem/CheckoutItem';
 import CollectionItem from './CollectionItem/CollectionItem';
 import CollectionPreview from './CollectionPreview/CollectionPreview';
 import CustomButton from './CustomButton/CustomButton';
@@ -13,6 +15,8 @@ import SignUp from './SignUp/SignUp';
 export {
   CartDropdown,
   CartIcon,
+  CartItem,
+  CheckoutItem,
   CollectionItem,
   CollectionPreview,
   CustomButton,

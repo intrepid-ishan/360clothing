@@ -26,12 +26,9 @@ const CartIcon = (props) => {
   );
 };
 
-const mapStateToProps = (state) => {
-  console.warn('I will be called on every state update');
-  return {
-    totalItemCount: selectCartItemsCount(state)
-  };
-};
+const mapStateToProps = (state) => ({
+  totalItemCount: selectCartItemsCount(state)
+});
 
 const mapDispatchToProps = (dispatch) => ({
   toggleCartDropdown: () => dispatch(toggleCartDropdown())

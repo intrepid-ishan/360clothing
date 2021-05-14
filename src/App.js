@@ -2,9 +2,8 @@ import React, { useEffect } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-// import classes from './App.scss';
 import { Header } from './components';
-import { HomePage, ShopPage, AuthenticationPage } from './pages';
+import { HomePage, ShopPage, AuthenticationPage, CheckoutPage } from './pages';
 
 import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
@@ -34,6 +33,7 @@ const App = (props) => {
       <Switch>
         <Route exact path="/" component={HomePage} />
         <Route path="/shop" component={ShopPage} />
+        <Route exact path="/checkout" component={CheckoutPage} />
         <Route
           exact
           path="/signin"
