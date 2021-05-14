@@ -20,5 +20,10 @@
   height: 240px;
   display: flex;
   flex-direction: column;
-  overflow: scroll;
+  overflow: auto;
+}
+
+.emptyMessage {
+  font-size: 18px;
+  margin: 50px auto;
 }

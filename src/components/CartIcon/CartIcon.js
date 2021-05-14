@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import classes from './CartIcon.scss';
 
 import { toggleCartDropdown } from '../../redux/cart/cart.actions';
+import { selectCartItemsCount } from '../../redux/cart/cart.selectors';
 
 import logo from '../../assets/shopping-bag.svg';
 
 const CartIcon = (props) => {
   const { toggleCartDropdown, totalItemCount } = props;
+
   return (
     <div
       className={classes.cartIcon}
@@ -24,13 +26,10 @@ const CartIcon = (props) => {
   );
 };
 
-const getTotalCount = (items) =>
-  items.reduce((acc, item) => acc + item.quantity, 0);
-
 const mapStateToProps = (state) => {
   console.warn('I will be called on every state update');
   return {
-    totalItemCount: getTotalCount(state.cart.cartItems)
+    totalItemCount: selectCartItemsCount(state)
   };
 };
 
