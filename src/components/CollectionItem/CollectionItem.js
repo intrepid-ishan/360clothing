@@ -26,7 +26,7 @@ const styles = {
 };
 
 const CollectionItem = (props) => {
-  const { item, addItem } = props;
+  const { item, addItem, containerStyle } = props;
   const { name, price, imageUrl } = item;
 
   const [isHover, setIsHover] = useState(false);
@@ -34,6 +34,7 @@ const CollectionItem = (props) => {
   return (
     <div
       className={classes.collectionItem}
+      style={containerStyle}
       onMouseOver={() => setIsHover(true)}
       onMouseOut={() => setIsHover(false)}
     >
