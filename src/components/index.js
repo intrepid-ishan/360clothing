@@ -3,6 +3,7 @@ import CartIcon from './CartIcon/CartIcon';
 import CartItem from './CartItem/CartItem';
 import CheckoutItem from './CheckoutItem/CheckoutItem';
 import CollectionItem from './CollectionItem/CollectionItem';
+import CollectionsOverview from './CollectionsOverview/CollectionsOverview';
 import CollectionPreview from './CollectionPreview/CollectionPreview';
 import CustomButton from './CustomButton/CustomButton';
 import Directory from './Directory/Directory';
@@ -18,6 +19,7 @@ export {
   CartItem,
   CheckoutItem,
   CollectionItem,
+  CollectionsOverview,
   CollectionPreview,
   CustomButton,
   Directory,
