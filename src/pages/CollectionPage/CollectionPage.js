@@ -30,8 +30,15 @@ const CollectionPage = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  collection: state.shop.collections[ownProps.match.params.collectionId]
-});
+const mapStateToProps = (state, ownProps) => {
+  const { collections } = state.shop;
+  const collection = collections.find(
+    (v) => v.routeName === ownProps.match.params.collectionId
+  );
+
+  return {
+    collection
+  };
+};
 
 export default connect(mapStateToProps)(CollectionPage);
