@@ -27,6 +27,23 @@ const App = (props) => {
     });
   }, [setCurrentUser]);
 
+  const handleClick = (e) => {
+    window.shouldOpenInNewTab = false;
+    // ⌘ || Ctrl
+    if (e.metaKey || e.ctrlKey) {
+      window.shouldOpenInNewTab = true;
+    }
+  };
+
+  useEffect(() => {
+    // whenever user clicks, the event will be first dispatched to below listener before EventTarget in DOM Tree
+    window.addEventListener('click', handleClick, { capture: true });
+
+    return () => {
+      window.removeEventListener('click', handleClick, { capture: true });
+    };
+  });
+
   return (
     <div>
       <Header />

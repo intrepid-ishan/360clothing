@@ -11,10 +11,15 @@ import { selectCartItems } from '../../redux/cart/cart.selectors';
 import { toggleCartDropdown } from '../../redux/cart/cart.actions';
 
 const CartDropdown = (props) => {
-  const { cartItems, history, toggleCartDropdown } = props;
+  const { cartItems, history, toggleCartDropdown, match } = props;
 
   const navigateToCheckout = () => {
-    history.push('/checkout');
+    if (window.shouldOpenInNewTab) {
+      // noopener: will not have access back to the originating window
+      window.open(`${match.url}checkout`, '_blank', 'noopener');
+    } else {
+      history.push('/checkout');
+    }
     toggleCartDropdown();
   };
 
