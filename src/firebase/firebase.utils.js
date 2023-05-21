@@ -2,15 +2,16 @@ import firebase from 'firebase/app';
 import 'firebase/firestore';
 import 'firebase/auth';
 
+// -- add config
 const config = {
-  apiKey: 'AIzaSyDvjXX5zreQHyMwuU3Dbkkrzb4ggBOUsSk',
-  authDomain: 'clothing-db-8ce94.firebaseapp.com',
-  databaseURL: 'https://clothing-db-8ce94.firebaseio.com',
-  projectId: 'clothing-db-8ce94',
-  storageBucket: 'clothing-db-8ce94.appspot.com',
-  messagingSenderId: '178567192526',
-  appId: '1:178567192526:web:92040bb27ae370b023159f',
-  measurementId: 'G-M84N2LR4M9'
+  apiKey: '',
+  authDomain: '',
+  databaseURL: '',
+  projectId: '',
+  storageBucket: '',
+  messagingSenderId: '',
+  appId: '',
+  measurementId: ''
 };
 
 firebase.initializeApp(config);
